@@ -11,15 +11,15 @@ Executando no terminar o comando  mvn `spring-boot:run` o servidor pode ser aces
 ## API UPLOAD
 
 [POST]
-http://localhost:5000/upload
+http://localhost:5000/api/upload
 
 ## API FILES
 
 [GET]
-http://localhost:5000/files
+http://localhost:5000/api/files
 
 ## API CONSOLIDADO
 
 [GET]
-http://localhost:5000/consolidado
+http://localhost:5000/api/consolidado
 
