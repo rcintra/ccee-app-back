@@ -10,11 +10,15 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
+
 @ControllerAdvice
 public class FileUploadExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final String INTERNAL_ERROR = "Erro ao processar a requisição";
     private static final String MSG_FILE_MAX_SIZE = "Arquivo muito grande!";
+
+    private static final String MSG_FILE_VALID = "Arquivo Invalido.";
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public ResponseEntity<ResponseMessage> handleMaxSizeException(MaxUploadSizeExceededException exc) {
@@ -24,6 +28,11 @@ public class FileUploadExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handlerAllException(Exception ex, WebRequest request) {
         return handleExceptionInternal(ex, new ResponseMessage(INTERNAL_ERROR), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Object> handlerMultipartException(ConstraintViolationException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(MSG_FILE_VALID));
     }
 
 }
