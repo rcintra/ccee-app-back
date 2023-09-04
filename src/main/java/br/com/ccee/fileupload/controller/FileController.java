@@ -6,6 +6,8 @@ import br.com.ccee.fileupload.message.ResponseMessage;
 import br.com.ccee.fileupload.service.ArquivoService;
 import br.com.ccee.fileupload.service.FileUploadService;
 import br.com.ccee.fileupload.service.IntegrationGateway;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class FileController {
+
+    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     private IntegrationGateway gateway;
     private ArquivoService arquivoService;
@@ -32,9 +36,9 @@ public class FileController {
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file")MultipartFile file) throws Exception {
         gateway.sendMessage(file.getBytes(), file.getOriginalFilename());
+        logger.info("Arquivo upload com sucesso: " + file.getOriginalFilename());
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseMessage("Arquivo upload com sucesso: " + file.getOriginalFilename()
-
                 )
         );
     }

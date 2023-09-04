@@ -1,6 +1,6 @@
 package br.com.ccee.fileupload.transformer.helper;
 
-import br.com.ccee.fileupload.transformer.element.*;
+import br.com.ccee.fileupload.transformer.element.AgentesElement;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -27,32 +27,4 @@ public class Jaxb2Helper {
         return agentesElement;
     }
 
-    private void printElements(AgentesElement agentes) {
-        for (AgenteElement ag : agentes.getAgentes()) {
-            System.out.println(ag.getCodigo());
-            System.out.println(ag.getData());
-            for (RegiaoElement re : ag.getRegioes()) {
-                System.out.println(re.getSigla());
-                System.out.println("---");
-                for (ValuesElement vs : re.getGeracao()){
-                    for (ValueElement v : vs.getValores()) {
-                        System.out.print(v.getValor() + ", ");
-                    }
-                }
-                System.out.println("---");
-                for (ValuesElement vs : re.getCompra()){
-                    for (ValueElement v : vs.getValores()) {
-                        System.out.print(v.getValor() + ", ");
-                    }
-                }
-                System.out.println("---");
-                for (ValuesElement vs : re.getPrecoMedio()){
-                    for (ValueElement v : vs.getValores()) {
-                        System.out.print(v.getValor() + ", ");
-                    }
-                }
-                System.out.println("---");
-            }
-        }
-    }
 }

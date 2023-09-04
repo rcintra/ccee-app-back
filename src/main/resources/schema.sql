@@ -29,7 +29,7 @@ ALTER TABLE regioes ADD CONSTRAINT FK_REGIOES_ON_AGENTE FOREIGN KEY (agente_id) 
 CREATE TABLE tipo_valores (
   id INT AUTO_INCREMENT NOT NULL,
    tipo VARCHAR(255) NULL,
-   valor DECIMAL NULL,
+   valor DECIMAL(10,3) NULL,
    regiao_id INT NOT NULL,
    CONSTRAINT pk_tipovalores PRIMARY KEY (id)
 );
