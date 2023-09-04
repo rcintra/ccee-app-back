@@ -33,7 +33,7 @@ public class FileController {
     private FileUploadService fileUploadService;
 
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@ValidFile @RequestParam("file") MultipartFile file) throws Exception {
+    public ResponseEntity<ResponseMessage> uploadFile(@ValidFile @RequestPart("file") MultipartFile file) throws Exception {
         gateway.sendMessage(file.getBytes(), file.getOriginalFilename());
         logger.info("Arquivo upload com sucesso: " + file.getOriginalFilename());
         return ResponseEntity.status(HttpStatus.OK).body(

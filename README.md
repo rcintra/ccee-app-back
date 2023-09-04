@@ -23,3 +23,5 @@ http://localhost:5000/api/files
 [GET]
 http://localhost:5000/api/consolidado
 
+## SWAGGER
+http://localhost:8080/swagger-ui/index.html
